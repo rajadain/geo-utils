@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Convert GeoJSON to EsriJson</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Convert GeoJSON to EsriJson</h1>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="geoJsonField">GeoJSON</label>
+                <textarea id="geoJsonField" class="form-control" rows="13"></textarea>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6">
+                    <button id="geoToEsri" class="btn btn-default btn-block">↓ Convert GeoJSON to EsriJson ↓</button>
+                </div>
+                <div class="col-md-6">
+                    <button id="esriToGeo" class="btn btn-default btn-block" disabled="disabled">↑ Convert EsriJson to GeoJSON ↑</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="esriJsonField">EsriJson</label>
+                <textarea id="esriJsonField" class="form-control" rows="13"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer/1.0.5/terraformer.min.js"></script>
+    <script src="http://cdn-geoweb.s3.amazonaws.com/terraformer-arcgis-parser/1.0.4/terraformer-arcgis-parser.min.js"></script>
+
+    <script type="text/javascript">
+        $('#geoToEsri').click(function() {
+            var geoJson = JSON.parse($('#geoJsonField').val());
+            var esriJson = Terraformer.ArcGIS.convert(geoJson);
+            $('#esriJsonField').val(JSON.stringify(esriJson, null, '  '));
+        });
+    </script>
+  </body>
+</html>
